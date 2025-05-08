@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رزرو صندلی سالن دکتر فروزان‌فر</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      direction: rtl;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .seat {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+      background-color: #6ab04c;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .seat.selected {
+      background-color: #f39c12;
+    }
+    .seat.taken {
+      background-color: #bdc3c7;
+      cursor: not-allowed;
+    }
+    #screen {
+      background: #333;
+      color: white;
+      padding: 10px;
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 5px;
+    }
+    #seating-area {
+      margin: 20px;
+    }
+    #pay-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #pay-button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h1>رزرو صندلی سالن دکتر فروزان‌فر</h1>
+  <div id="screen">صفحه نمایش</div>
+  <div id="seating-area"></div>
+  <button id="pay-button" disabled>پرداخت</button>  <script>
+    const seatingArea = document.getElementById('seating-area');
+    const payButton = document.getElementById('pay-button');
+    const rows = ['A','B','C','D','E','F','G'];
+    const seatsPerRow = { A: 10, B: 14, C: 10, D: 10, E: 12, F: 12, G: 6 };
+    let selectedSeat = null;
+
+    rows.forEach(row => {
+      for (let i = 1; i <= seatsPerRow[row]; i++) {
+        const seat = document.createElement('div');
+        seat.classList.add('seat');
+        seat.dataset.seat = row + i;
+        seat.addEventListener('click', () => selectSeat(seat));
+        seatingArea.appendChild(seat);
+      }
+      const br = document.createElement('br');
+      seatingArea.appendChild(br);
+    });
+
+    function selectSeat(seat) {
+      if (seat.classList.contains('taken')) return;
+      document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected'));
+      seat.classList.add('selected');
+      selectedSeat = seat.dataset.seat;
+      payButton.disabled = false;
+    }
+
+    payButton.addEventListener('click', () => {
+      if (!selectedSeat) return;
+      const zarinpalUrl = `https://zarinp.al/709040?amount=25000&description=رزرو صندلی ${selectedSeat}`;
+      window.location.href = zarinpalUrl;
+    });
+  </script></body>
+</html>
