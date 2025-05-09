@@ -1,4 +1,6 @@
-<style>.StartCss {</style><!DOCTYPE html><html lang="fa">
+
+<!DOCTYPE html>
+<html lang="fa">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,7 +62,9 @@
   <h1>رزرو صندلی سالن دکتر فروزان‌فر</h1>
   <div id="screen">صفحه نمایش</div>
   <div id="seating-area"></div>
-  <button id="pay-button" disabled>پرداخت</button>  <script>
+  <button id="pay-button" disabled>پرداخت</button>
+
+  <script>
     const seatingArea = document.getElementById('seating-area');
     const payButton = document.getElementById('pay-button');
     const rows = ['A','B','C','D','E','F','G'];
@@ -92,5 +96,6 @@
       const zarinpalUrl = `https://zarinp.al/709040?amount=25000&description=رزرو صندلی ${selectedSeat}`;
       window.location.href = zarinpalUrl;
     });
-  </script></body>
-</html><script>Function StartJS() {</script>
+  </script>
+</body>
+</html>
